@@ -13,5 +13,12 @@ public class GreetingController {
         model.addAttribute("name", name);
         return "greeting";
     }
+    
+    @RequestMapping("/submitted")
+    public String submitted(@RequestParam(value="author", required=false, defaultValue="none") String author, Model model) {
+        model.addAttribute("author", author);
+        return "submitted";
+    }
+    
 
 }
