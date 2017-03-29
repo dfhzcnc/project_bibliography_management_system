@@ -1,2 +1,2 @@
-Project: Bibliograph System
+Project: Bibliograph Management System
 ========================
