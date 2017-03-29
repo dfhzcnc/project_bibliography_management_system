@@ -6,13 +6,27 @@
 </head>
 <body>
     <!--<p th:text="'Hello, ' + ${name} + '!'" /> comment out-->
-    <form action="/submitted">
+    
+    <form action="/submitted" id="myform">
       Author <input type="text" name="author"/><br />
       Title <input type="text" name="title"/><br />
       Year <input type="text" name="year"/><br />
       Journal <input type="text" name="journal"/><br />
-      <input type="submit" value="Submit"/>
+      <input type="submit" value="Add" onClick="return empty();"/>
     </form>
+    
+    <script>
+        function empty() {
+            var x;
+            x = document.getElementById("myform").elements["author"].value;
+            alert("click!")
+            if (x == "") {
+                alert("Invalid Author Name");
+            return false;
+        };
+    }
+    </script>
+    
 </body>
 </html>
 

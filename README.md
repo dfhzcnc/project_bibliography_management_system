@@ -1,3 +1,3 @@
-# project_bibliography_management_system
+Project: Bibliography Management System
 
 #test

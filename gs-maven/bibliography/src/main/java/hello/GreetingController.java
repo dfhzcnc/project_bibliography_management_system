@@ -15,8 +15,15 @@ public class GreetingController {
     }
     
     @RequestMapping("/submitted")
-    public String submitted(@RequestParam(value="author", required=false, defaultValue="none") String author, Model model) {
+    public String submitted(@RequestParam(value="author") String author,
+                            @RequestParam(value="title", required=true) String title,
+                            @RequestParam(value="year", required=true) String year,
+                            @RequestParam(value="journal", required=true) String journal, Model model) {
+
         model.addAttribute("author", author);
+        model.addAttribute("title", title);
+        model.addAttribute("year", year);
+        model.addAttribute("journal", journal);
         return "submitted";
     }
     
