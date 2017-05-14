@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style type="text/css">
+    body { text-align: center; padding: 150px;}
+    h1 { font-size: 50px; }
+    body { font: 20px Helvetica, sans-serif; color: #333;}
+    button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 30px 0;
+    box-sizing: border-box;
+    }
+    input[name=search] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('https://kpbs.media.clients.ellingtoncms.com/static/kpbs/images/base/nav-search_icon.png');
+    background-size: 30px 30px;
+    background-position: 5px 5px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    }
+
+    input[name=search]:focus {
+    width: 100%;
+    }
+</style>
+<body bgcolor="#e5e4e3">
+<div style="text-align: center;">
+	<h1>Your Biblio List</h1>
+    <form>
+      <input type="text" name="search" placeholder="Search.."/>
+    </form>
+    <a href="https://bibliography-management-system-dfhzcnc.c9users.io/greeting">
+       <button>Go Back</button>
+    </a>
+	<p th:each="post : ${posts}">
+	    <div style="background-color:black;color:white;padding:20px;">
+		<div th:text="'Author: '+${post.author}"></div>
+		<div th:text="'Title: '+${post.title}"></div>
+		<div th:text="'Year: '+${post.year}"></div>
+		<div th:text="'Journal: '+${post.journal}"></div>
+		<form action="/result" th:id="${__${post.id}__}" method="POST">
+          <input type="submit" value="Delete" onClick="return lidongfangguo(this.form);"/>
+          <input type="hidden" name="deleteID"/><br />
+        </form>
+	    </div>
+	    <script th:inline="javascript">
+        /*<![CDATA[*/
+        
+            function lidongfangguo(form_obejct){
+                 //alert(form_obejct.id);
+                 var x = form_obejct.id;
+                 //alert(x);
+                 String(x);
+                 form_obejct.elements["deleteID"].value=x;
+                // return false;
+            }
+        /*]]>*/
+        </script>
+	</p>
+</div>
+</body>
+</html>

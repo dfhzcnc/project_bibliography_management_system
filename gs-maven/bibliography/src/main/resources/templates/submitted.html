@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Your Entry: ' + ${author} + ${title} + ${year} + ${journal} + '!'" /> 
+   <!-- <p th:text="'Your Entry: ' + ${author} + ${title} + ${year} + ${journal} + '!'" /> -->
+   <p th:text="'Your Entry: ' + ${author} + '!'" /> 
+   <p th:text="'deleteID: ' + ${deleteID} + '!'" />
 </body>
 </html>
 

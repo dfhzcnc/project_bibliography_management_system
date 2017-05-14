@@ -1,32 +1,53 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Adding Entry</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
+<style>
+  body { text-align: center; padding: 150px;}
+  h1 { font-size: 50px; }
+  body { font: 20px Helvetica, sans-serif; color: #333;}
+  input, button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    }
+</style>
+
+<body bgcolor="#e5e4e3">
+<div style="text-align: center;">
     <!--<p th:text="'Hello, ' + ${name} + '!'" /> comment out-->
-    
-    <form action="/submitted" id="myform">
+    <div style="display: inline-block; text-align: left">
+    <form action="/result" id="myform">
       Author <input type="text" name="author"/><br />
       Title <input type="text" name="title"/><br />
-      Year <input type="text" name="year"/><br />
+      Year <input type="number" name="year" min="1800" max="2017"/><br />
       Journal <input type="text" name="journal"/><br />
-      <input type="submit" value="Add" onClick="return empty();"/>
+      <input type="submit" value="Add" onClick="return validate();"/>
+      <input type="reset" value="Reset"/>
     </form>
-    
+    <a href="https://bibliography-management-system-dfhzcnc.c9users.io/result">
+       <button>See List</button>
+    </a>
+    </div>
     <script>
-        function empty() {
-            var x;
+        function validate() {
+            var x , y , z , a;
             x = document.getElementById("myform").elements["author"].value;
-            alert("click!")
-            if (x == "") {
-                alert("Invalid Author Name");
+            y = document.getElementById("myform").elements["title"].value;
+            z = document.getElementById("myform").elements["year"].value;
+            a = document.getElementById("myform").elements["journal"].value;
+            //alert("click!") ruins for testing
+            if (x == "" || y == "" || z == "" || a == "") {
+                alert("Invalid Value");
             return false;
-        };
+            };
     }
-    </script>
     
+    </script>
+</div>    
 </body>
 </html>
 
