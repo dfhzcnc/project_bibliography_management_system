@@ -1,18 +1,40 @@
 <!doctype html>
-<title>Welcome Page</title>
+<title>Simple Bibliograph System</title>
 <style>
-  body { text-align: center; padding: 150px; background-color: #e5e4e3;}
+  body { text-align: center; background-color: #e5e4e3;}
   h1 { font-size: 50px; }
   body { font: 20px Helvetica, sans-serif; color: #333; }
   article { display: block; text-align: left; width: 650px; margin: 0 auto; }
   a { color: #dc8100; text-decoration: none; }
   a:hover { color: #333; text-decoration: none; }
+    .outer {
+        display: table;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    
+    .middle {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    
+    .inner {
+        margin-left: auto;
+        margin-right: auto; 
+        width: 650px/*whatever width you want*/;
+        }
 </style>
-
-<article>
-    <h1>Welcome!</h1>
-    <div>
-        <p>This is a simple online bibliograpgh system where you can add, modify or delete your bibliography collection!</p>
-        <p><a href="/greeting">Enter Now</a></p>
+<div class="outer">
+  <div class="middle">
+    <div class="inner">
+            <article>
+                <h1>Welcome!</h1>
+                <div>
+                    <p>This is a simple online bibliograpgh system where you can add, modify or delete your bibliography collection!</p>
+                    <p><a href="/greeting">Enter Now</a></p>
+                </div>
+            </article>
     </div>
-</article>
+  </div>
+</div>

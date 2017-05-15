@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import hello.User;
 import hello.UserRepository;
+import hello.UserPredicates;
 
    
 @Controller
@@ -26,21 +27,35 @@ public class GreetingController {
     }
     
     @RequestMapping("/result")
-	public String showAllPosts(@RequestParam(value="deleteID", required=false, defaultValue="empty") String deleteID,
+	public String showAllPosts(@RequestParam(value="seeList", required=false, defaultValue="false") String seeList,
+							@RequestParam(value="searchTerm", required=false, defaultValue="empty") String searchTerm,
+							@RequestParam(value="deleteID", required=false, defaultValue="empty") String deleteID,
 							@RequestParam(value="author", required=false, defaultValue="specialcase") String author,
                             @RequestParam(value="title", required=false) String title,
                             @RequestParam(value="year", required=false) Integer year,
                             @RequestParam(value="journal", required=false) String journal, Model model) {
         User n = new User(author, title, year, journal);
+ 
         
-        //Handles Delete & Redirect
-        if(author.equals("specialcase")){
+        //Handles Delete & Redirect & search
+        if(author.equals("specialcase")){ 
         	if(!deleteID.equals("empty")){
-        	userRepository.delete(Integer.parseInt(deleteID));
+        		userRepository.delete(Integer.parseInt(deleteID));
+        		model.addAttribute("posts", userRepository.findAll());
+        		return "result";
         	}
-        	model.addAttribute("posts", userRepository.findAll());
+        	if(!searchTerm.equals("empty")){
+        		model.addAttribute("posts", userRepository.findAll(UserPredicates.ContainsIgnoreCase(searchTerm)));
+        		return "result :: resultsList";
+        	}
+        	if(searchTerm.equals("empty")&&seeList.equals("false")){
+        		model.addAttribute("posts", userRepository.findAll());
+        		return "result :: resultsList";
+        	}
+        	
+			model.addAttribute("posts", userRepository.findAll());
         	return "result";
-        }	
+        }
         	
         //eliminate duplicate entry & add new to repo	
         if(Previous.getAuthor()=="empty" || !(Previous.getAuthor().equals(author)&&

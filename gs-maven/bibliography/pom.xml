@@ -31,6 +31,27 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <dependency>
+          <groupId>com.querydsl</groupId>
+          <artifactId>querydsl-apt</artifactId>
+          <version>${querydsl.version}</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.querydsl</groupId>
+          <artifactId>querydsl-jpa</artifactId>
+          <version>${querydsl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-core</artifactId>
+            <version>4.1.3</version>
+        </dependency>
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+          <version>1.6.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -39,6 +60,24 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- This section is for QueryDSL(Maven APT plugin Configure) -->
+            <plugin>
+              <groupId>com.mysema.maven</groupId>
+              <artifactId>apt-maven-plugin</artifactId>
+              <version>1.1.3</version>
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>process</goal>
+                  </goals>
+                  <configuration>
+                    <outputDirectory>target/generated-sources/java</outputDirectory>
+                    <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+            <!--Ends  here -->
         </plugins>
     </build>
 
