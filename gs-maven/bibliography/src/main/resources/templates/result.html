@@ -36,7 +36,7 @@
     }
     .inline{
       display: inline;
-  		justify-content: center;
+  	  justify-content: center;
 	}
 </style>
 <body bgcolor="#e5e4e3">
@@ -64,13 +64,18 @@
             <div th:fragment="resultsList" class="results-block">
         	<p th:each="post : ${posts}">
         	    <div style="background-color:black;color:white;padding:20px;">
-        		<div>Author:<div class="inline" th:text="${post.author}"></div></div>
-        		<div>Title:<div class="inline" th:text="${post.title}"></div></div>
-        		<div>Year:<div class="inline" th:text="${post.year}"></div></div>
-        		<div>Journal:<div class="inline" th:text="${post.journal}"></div></div>
+        		<div>Author:<div class="inline" th:id="'divAuthor'+${__${post.id}__}" th:text="${post.author}" contenteditable="true"></div></div>
+        		<div>Title:<div class="inline" th:id="'divTitle'+${__${post.id}__}" th:text="${post.title}" contenteditable="true"></div></div>
+        		<div>Year:<div class="inline" th:id="'divYear'+${__${post.id}__}" th:text="${post.year}" contenteditable="true"></div></div>
+        		<div>Journal:<div class="inline" th:id="'divJournal'+${__${post.id}__}" th:text="${post.journal}" contenteditable="true"></div></div>
         		<form action="/result" th:id="${__${post.id}__}" method="POST">
                   <input type="submit" value="Delete" onClick="return deletethisID(this.form);"/>
-                  <input type="hidden" name="deleteID"/><br />
+                  <input type="submit" value="Update" onClick="return updateID(this.form);"/>
+                  <input type="hidden" name="deleteID"/>
+                  <input type="hidden" name="author"/>
+                  <input type="hidden" name="title"/>
+                  <input type="hidden" name="year"/>
+                  <input type="hidden" name="journal"/>
                 </form>
         	    </div>
         	    <script th:inline="javascript">
@@ -83,6 +88,27 @@
                          String(x);
                          form_obejct.elements["deleteID"].value=x;
                         // return false;
+                    }
+                    
+                    function updateID(form_obejct){
+                    //alert(form_obejct.id);
+                         var x = form_obejct.id;
+                         alert(x);
+                         String(x);
+                         form_obejct.elements["deleteID"].value=x;
+                         var ID="divAuthor"+x;
+                         String(ID);
+                         alert(ID);
+                         alert(document.getElementById(ID).textContent);
+                         form_obejct.elements["author"].value=document.getElementById("divAuthor"+x).textContent;
+                         form_obejct.elements["title"].value=document.getElementById("divTitle"+x).textContent;
+                         form_obejct.elements["year"].value=document.getElementById("divYear"+x).textContent;
+                         form_obejct.elements["journal"].value=document.getElementById("divJournal"+x).textContent;
+                         alert(form_obejct.elements["author"].value);
+                         alert(form_obejct.elements["title"].value);
+                         alert(form_obejct.elements["year"].value);
+                         alert(form_obejct.elements["journal"].value);
+                         //return false;
                     }
                 /*]]>*/
                 </script>

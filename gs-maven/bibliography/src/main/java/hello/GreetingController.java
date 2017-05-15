@@ -36,7 +36,21 @@ public class GreetingController {
                             @RequestParam(value="journal", required=false) String journal, Model model) {
         User n = new User(author, title, year, journal);
  
-        
+        //handles update
+        if(!deleteID.equals("empty")&&!author.equals("specialcase")){
+        	userRepository.delete(Integer.parseInt(deleteID));
+        	Previous.setAuthor(author);
+			Previous.setTitle(title);
+			Previous.setYear(year);
+			Previous.setJournal(journal);
+			n.setAuthor(author);
+			n.setTitle(title);
+			n.setYear(year);
+			n.setJournal(journal);
+			userRepository.save(n);
+			model.addAttribute("posts", userRepository.findAll());
+			return "result";
+        }
         //Handles Delete & Redirect & search
         if(author.equals("specialcase")){ 
         	if(!deleteID.equals("empty")){
