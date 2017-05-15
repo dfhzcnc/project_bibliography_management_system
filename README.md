@@ -5,7 +5,7 @@
 ## Key Components
 
 ###### Spring MVC Model
-###### Thymleaf HTML 
+###### Thymleaf HTML Template, AJAX
 ###### Spring Data JPA: CRUDRepository with Querydsl
 
 ## Basic Features
